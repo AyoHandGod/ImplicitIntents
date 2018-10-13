@@ -42,8 +42,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void locClick(View view) {
+        // Get location text
+        String loc = locEditText.getText().toString();
+
+        // parse text and create intent
+        Uri addressUri = Uri.parse("geo:0,0?q" + loc);
+        Intent intent = new Intent(Intent.ACTION_VIEW, addressUri);
+
+        // Find activity to handle intent and start activity
+        if(intent.resolveActivity(getPackageManager()) != null){
+            startActivity(intent);
+        } else {
+            Log.d("ImplicitIntents", "Can't handle this intent!");
+        }
     }
 
     public void shareClick(View view) {
+        // TODO
     }
 }
