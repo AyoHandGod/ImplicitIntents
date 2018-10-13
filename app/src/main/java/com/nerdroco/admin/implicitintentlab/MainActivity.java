@@ -2,6 +2,7 @@ package com.nerdroco.admin.implicitintentlab;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -58,6 +59,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void shareClick(View view) {
-        // TODO
+        // Get share text
+        String shareText =shareEditText.getText().toString();
+        String mimeType = "text/plain";
+
+        // Allows us to give user option of picking app to use
+        ShareCompat.IntentBuilder
+                .from(this)  // Where activity launched
+                .setType(mimeType)  // MIME type of item being shared
+                .setChooserTitle(R.string.chooseTitle)  // Title that appears on system app chooser
+                .setText(shareText) // actual text to be shared
+                .startChooser();  // Show the system app chooser and send the Intent
     }
 }
